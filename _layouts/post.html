@@ -18,7 +18,7 @@ layout: default
             {% include category.html category=page.category %}
         </span>
       {% endif %}
-      {% if page.tags %}
+      {% if page.tags != empty %}
       • <span itemprop="keywords">
           {% for tag in page.tags %}
             {% include tag.html tag=tag %}
