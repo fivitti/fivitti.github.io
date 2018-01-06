@@ -13,22 +13,39 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Your awesome title
-email: your-email@example.com
+title: Log wyobraźni
+author: Sławomir Figiel
+email:
+email_captcha: http://www.google.com/recaptcha/mailhide/d?k=0151TWv_PjoKkXMVeHSNSPzA==&c=HGcy5fJSDLHvdWDU-mbqLdcCxJYqqfbHboeSAILKqy4=
 description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Magazyn myśli, pomysłów, ciekawych idei. Schron
+  działających rozwiązań odnalezionych w zakamarkach Internetu.
+  Tablica, którą mam nadzieję zapisać. 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+twitter_username:
+github_username:  fivitti
+linkedin: https://www.linkedin.com/in/slawomirfigiel/
+
+minima:
+  date_format: "%Y-%m-%d"
+  date_format_long: "%Y-%m-%d %H:%M"
 
 # Build settings
 markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
+
+# Where are tags and categories displayed
+tag_page: '/tags/'
+category_page: '/categories/'
+
+defaults:
+  - scope:
+      path: "assets/flames"
+    values:
+      side-background: true
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

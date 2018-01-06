@@ -1,0 +1,52 @@
+.page-side-container {
+    display: flex;
+}
+
+
+.page-side-info {
+    width: $image-panel-width;
+    color: $background-color;
+    min-height: 100vh;
+    background-color: $text-color;
+    
+}
+
+.page-side-info::before {
+    content: "";
+    background-image: $background-url;
+    
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position: fixed;
+    height: 100%;
+    width: $image-panel-width;
+}
+
+.page-side-content {
+    width: 100% - $image-panel-width;
+    display: flex;
+    flex-direction: column; 
+}
+
+.site-header {
+    flex: 0;
+}
+
+.page-content {
+    flex: 1;
+}
+
+.site-footer {
+    flex: 0;
+}
+
+@include media-query($on-palm) {
+    .page-side-info {
+        display: none;
+    }
+
+    .page-side-content {
+        width: 100%;
+    }
+}
