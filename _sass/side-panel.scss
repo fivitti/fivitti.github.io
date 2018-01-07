@@ -42,6 +42,10 @@
 }
 
 @include media-query($on-palm) {
+    .page-side-container {
+        display: block;
+    }
+
     .page-side-info {
         display: none;
     }
