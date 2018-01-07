@@ -1,9 +1,14 @@
+.page-side-container {
+    display: flex;
+}
+
+
 .page-side-info {
     width: $image-panel-width;
     color: $background-color;
     min-height: 100vh;
     background-color: $text-color;
-    float: left;    
+    
 }
 
 .page-side-info::before {
@@ -20,7 +25,20 @@
 
 .page-side-content {
     width: 100% - $image-panel-width;
-    float: right;
+    display: flex;
+    flex-direction: column; 
+}
+
+.site-header {
+    flex: 0;
+}
+
+.page-content {
+    flex: 1;
+}
+
+.site-footer {
+    flex: 0;
 }
 
 @include media-query($on-palm) {
