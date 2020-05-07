@@ -5,7 +5,7 @@ permalink: tags
 ---
 
 {% assign labels = site.tags | sort %}
-{% if labels != '' %}
+{% if labels == empty %}
 <p>Nie ma jeszcze żadnych tagów. Nowe posty w przygotowaniu!</p>
 {% endif %}
 

@@ -4,8 +4,6 @@
 {% assign background = site.static_files | where: "extname", ".png" | where: "side-background", true | sample %}
 
 @import "minima";
-
-$image-panel-width: 30%;
 $background-url: url("{{ background.path }}");
 
 $size: $base-font-size;

@@ -16,11 +16,9 @@
 title: Log wyobraźni
 author: Sławomir Figiel
 email:
-email_captcha: http://www.google.com/recaptcha/mailhide/d?k=0151TWv_PjoKkXMVeHSNSPzA==&c=HGcy5fJSDLHvdWDU-mbqLdcCxJYqqfbHboeSAILKqy4=
+email_captcha: https://mailhide.io/e/NqC97
 description: > # this means to ignore newlines until "baseurl:"
-  Magazyn myśli, pomysłów, ciekawych idei. Schron
-  działających rozwiązań odnalezionych w zakamarkach Internetu.
-  Tablica, którą mam nadzieję zapisać. 
+  Krótkie osobiste notatki o wszystkim.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username:
