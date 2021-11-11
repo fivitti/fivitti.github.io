@@ -1,0 +1,40 @@
+---
+layout: page
+title: Tagi
+permalink: tags
+---
+
+{% assign labels = "" | split: "" %}
+{% assign tags = site.tags | sort %}
+
+{% for tag in tags %}
+    {% assign label_value = tag[0] %}
+    {% assign labels = labels | push: label_value %}
+{% endfor %}
+
+
+{% if labels == empty %}
+<p>Nie ma jeszcze żadnych kategorii. Nowe posty w przygotowaniu!</p>
+{% endif %}
+
+<div class="label-expo">
+    <h3 class="label-expo-list">
+        {% include tags.html tags=labels %}
+    </h3>
+    <hr/>
+    <div class="label-expo-section">
+        {% for label in tags %}
+            <h2 id="{{ label[0] | slugify }}">{{ label[0] }}</h2>
+            <ul class="post-list">
+                {% for post in label[1] %}
+                    <li>
+                        <a class="post-link" href="{{ site.baseurl }}{{ post.url }}">
+                            {{ post.title }}
+                            <small class="post-meta">{{ post.date | date_to_string }}</small>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+</div>

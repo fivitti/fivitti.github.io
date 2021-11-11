@@ -1,0 +1,29 @@
+<header class="post-header">
+    {%- if include.big -%}
+        <h1 class="post-title p-name" itemprop="name headline">
+            {{ page.title | escape }}
+        </h1>
+    {%- else -%}
+        <h3 class="post-title">
+            <a class="post-link" href="{{ include.post.url | relative_url }}">
+                {{ include.post.title | escape }}
+            </a>
+        </h3>
+    {%- endif -%}
+    <div class="post-meta post-meta-container">
+        {%- if include.post.tags -%}
+            {%- include tags.html tags=include.post.tags -%}
+            <span> • </span>
+        {%- endif -%}
+
+        {%- if page.author -%}
+            <span class="post-meta" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span class="p-author h-card" itemprop="name">{{ page.author }}</span><
+            </span>
+            <span> • </span>
+        {%- endif -%}
+
+        {%- assign date_format = site.minima.date_format | default: "%-d&nbsp;%b&nbsp;%Y" -%}
+        <span>{{ include.post.date | date: date_format }}</span>  
+    </div>
+</header>

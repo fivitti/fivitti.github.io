@@ -1,0 +1,20 @@
+.post-label {
+  display: inline-block;
+}
+
+.post-meta .post-label {
+  color: $grey-color
+}
+
+.post-label::before {
+  content: "#";
+  font-weight: bolder;
+}
+
+.post-label + .post-label {
+  margin-left: 0.35em;
+}
+
+.label-expo-list {
+  margin-bottom: 30px;
+}

@@ -1,0 +1,5 @@
+<span class="post-labels">
+    {%- for tag in include.tags -%}
+        {%- include tag.html tag=tag -%}
+    {%- endfor -%}
+</span>
