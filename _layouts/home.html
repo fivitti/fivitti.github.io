@@ -16,8 +16,14 @@ layout: default
       <li>
         {%- include post-header.html post=post -%}
         {%- if site.show_excerpts -%}
-          {% capture ellipsis %}&nbsp;<a class="" href="{{ post.url | relative_url }}">[...]</a>{% endcapture %}
-          {{ post.excerpt | truncatewords: 100, ellipsis }}
+          <!-- {% capture ellipsis %}&nbsp;<a class="" href="{{ post.url | relative_url }}">[...]</a>{% endcapture %} -->
+          {{ post.excerpt }}
+          {%- if post.content.size > post.excerpt.size -%}
+          {% assign content_size = post.content.size | times: 1.0 %}
+          {% assign content_size_diff = post.content.size | minus: post.excerpt.size | | times: 1.0 %}
+          {% assign rest_percent = content_size_diff | divided_by: content_size | times: 100 | round %}
+          <a class="" href="{{ post.url | relative_url }}">[Read more {{ rest_percent }}% text]</a>
+          {%- endif -%}
         {%- endif -%}
       </li>
       {%- endfor -%}
