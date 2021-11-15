@@ -18,12 +18,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: wypisy z kodu
+title: dot dot dash dot
 author: Sławomir Figiel
 email:
 email_captcha: https://mailhide.io/e/NqC97
 description: > # this means to ignore newlines until "baseurl:"
-  O wszystkim, o&nbsp;niczym i&nbsp;o&nbsp;czymś.
+  About&nbsp;everything, about&nbsp;nothing&nbsp;and about&nbsp;something.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 tag_page: tags

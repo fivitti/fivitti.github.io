@@ -11,7 +11,7 @@
         </h3>
     {%- endif -%}
     <div class="post-meta post-meta-container">
-        {%- if include.post.tags -%}
+        {%- if include.post.tags != empty -%}
             {%- include tags.html tags=include.post.tags -%}
             <span> • </span>
         {%- endif -%}
