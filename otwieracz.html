@@ -1,0 +1,216 @@
+<html>
+    <head>
+        <title>Otwieracz stron</title>
+        <style>
+            #stop {
+                width: 100%;
+            }
+
+            body {
+                max-width: 500px;
+            }
+
+            fieldset + fieldset {
+                margin-top: 1em;
+            }
+
+            .form-group {
+                display: flex;
+                flex-direction: row;
+                column-gap: 1em;
+                margin-bottom: 0.5em;
+            }
+
+            .center {
+                justify-content: center;
+            }
+
+            .title {
+                text-align: center;
+            }
+
+            .justify {
+                text-align: justify;
+            }
+
+            .col-4 {
+                flex: 4;
+            }
+
+            .col-2 {
+                flex: 2;
+            }
+
+            .col-1 {
+                flex: 1;
+            }
+
+            .success {
+                background-color: #4cd137;
+                border-color: #44bd32;
+            }
+
+            .warning {
+                background-color: #fbc531;
+                border-color: #e1b12c;
+            }
+
+            .danger {
+                background-color: #e84118;
+                border-color: #c23616;
+            }
+
+            .success:disabled, .warning:disabled, .danger:disabled {
+                background-color: #7f8fa6;
+                border-color: #718093;
+            }
+        </style>
+        <script defer>
+            /** @type HTMLFieldSetElement */
+            let formFieldset = null;
+            /** @type HTMLFieldSetElement */
+            let summary = null;
+            /** @type HTMLInputElement */
+            let countDown = null;
+            
+            const uniqueId = +new Date();
+            let windowId = 0;
+
+            let intervalId = null;
+            let toOpen = 0;
+
+            function setToOpenCounter(value) {
+                toOpen = value;
+                countDown.textContent = toOpen;
+            }
+
+            function decrementCounter() {
+                toOpen--;
+                countDown.textContent = toOpen;
+                if (toOpen <= 0) {
+                    stopExecution();
+                }
+            }
+
+            function stopExecution() {
+                clearInterval(intervalId);
+                intervalId = null;
+                setToOpenCounter(0);
+                summary.disabled = true;
+                formFieldset.disabled = false;
+            }
+
+            function openUrl(url, kind, width, height) {
+                let handler = null;
+                if (kind === "tab") {
+                    handler = window.open(url, '_blank')
+                } else {
+                    handler = window.open(url, `window_${uniqueId}_${windowId++}`, `width=${width},height=${height}`)
+                }
+
+                decrementCounter();
+            }
+
+            window.onload = function() {
+                const form = document.getElementById("form");
+                formFieldset = form.getElementsByTagName("fieldset")[0]
+                summary = document.querySelector("#summary");
+                countDown = document.getElementById("countdown");
+
+                form.onsubmit = function() {
+                    const data = new FormData(form);
+                    
+                    setToOpenCounter(parseInt(data.get('count'), 10))
+                    const interval = parseInt(data.get('interval'), 10) * 1000;
+                    const url = data.get('url');
+                    const kind = data.get('kind');
+                    
+                    intervalId = setInterval(openUrl, interval, url, kind);
+                    openUrl(url, kind);
+                    
+                    formFieldset.disabled = true;
+                    summary.disabled = false;
+
+                    return false;
+                }
+
+                const stopButton = document.getElementById("stop");
+                stopButton.onclick = stopExecution;
+            }
+        </script>
+    </head>
+    <body>
+        <form id="form" action="#" method="get">
+            <h1 class="title">Automatyczny otwieracz stron</h1>
+            <fieldset>
+                
+                <legend>Parametry</legend>
+                <div class="form-group">
+                    <label for="url" class="col-4">Adres URL</label>
+                    <input id="url" class="col-4" name="url" type="url" placeholder="https://facebook.com" />
+                    <span class="col-1"></span>
+                </div>
+                <div class="form-group">
+                    <label for="count" class="col-4">Liczba otwarć</label>
+                    <input id="count" class="col-4" name="count" type="number" value="3" min=1 step=1 />
+                    <span class="col-1"></span>
+                </div>
+                <div class="form-group">
+                    <label for="interval" class="col-4">Czas między otwarciami</label>
+                    <input id="interval" class="col-4" name="interval" type="number" value="15" min=1 step=1 />
+                    <span class="col-1">sekund</span>
+                </div>
+                <div class="form-group">
+                    <span class="col-4">Otwieraj strony w</span>
+                    <div class="col-2">
+                        <input id="kind-tab" name="kind" type="radio" value="tab" checked />
+                        <label for="kind-tab">kartach</label>
+                    </div>
+                    <div class="col-2">
+                        <input id="kind-page" name="kind" type="radio" value="page" />
+                        <label for="kind-page">oknach</label>
+                    </div>
+                    <span class="col-1"></span>
+                </div>
+                <div class="form-group">
+                    <label for="width" class="col-4">Szerokość okna</label>
+                    <input id="width" class="col-4" name="width" type="number" value="640" min=10 step=10 />
+                    <span class="col-1"></span>
+                </div>
+                <div class="form-group">
+                    <label for="height" class="col-4">Wysokość okna</label>
+                    <input id="height" class="col-4" name="height" type="number" value="480" min=10 step=10 />
+                    <span class="col-1"></span>
+                </div>
+                <div class="form-group center">
+                    <input type="reset" value="Zresetuj" class="warning" />
+                    <input id="submit" class="success" type="submit" value="Uruchom" />
+                </div>
+            </fieldset>
+        </form>
+        <fieldset id="summary" disabled>
+            <legend>Wykonanie</legend>
+            <div class="form-group">
+                <label for="countdown" class="col-4">Pozostało</label>
+                <span id="countdown" class="col-4">0</span>
+                <button id="stop" class="danger col-1">Stop</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Informacje</legend>
+            <div class="justify">
+                <p>Przy pierwszym uruchomieniu niezbędne może okazać się zezwolenie na wyskakujące okienka.
+
+                    Po kliknięciu "Uruchom" po prawej stronie może pojawić się ikona informująca o zablokowaniu
+                    wyskakujących okien. Należy ją kliknąć i wybrać opcję " Zawsze zezwalaj na wyskakujące okienka
+                    i przekierowania z tej strony".
+
+                    Szczegółowe instrukcje dostępne są <a href="https://support.google.com/chrome/answer/95472?hl=pl&co=GENIE.Platform%3DDesktop#zippy=%2Czezwalanie-na-wyskakujące-okienka-i-przekierowania-w-witrynie">
+                        tutaj
+                    </a>.
+                </p>
+                <p>Wersja 1.0</p>
+            </div>
+        </fieldset>
+    </body>
+</html>
